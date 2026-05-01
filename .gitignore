@@ -1,2 +1,86 @@
+# ----------------------
+# Dependencies
+# ----------------------
 node_modules/
+
+# ----------------------
+# Environment variables (VERY IMPORTANT)
+# ----------------------
 .env
+.env.*
+!.env.example
+
+# ----------------------
+# Logs
+# ----------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ----------------------
+# Runtime data
+# ----------------------
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ----------------------
+# Coverage / Testing
+# ----------------------
+coverage/
+.nyc_output/
+
+# ----------------------
+# Build output
+# ----------------------
+dist/
+build/
+
+# ----------------------
+# Cache
+# ----------------------
+.cache/
+.tmp/
+.temp/
+
+# ----------------------
+# OS files
+# ----------------------
+.DS_Store
+Thumbs.db
+
+# ----------------------
+# Editor / IDE
+# ----------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ----------------------
+# Optional: Uploads (if your app stores files)
+# ----------------------
+uploads/
+public/uploads/
+
+# ----------------------
+# Optional: Database files
+# ----------------------
+*.sqlite
+*.db
+
+# ----------------------
+# Docker (if used)
+# ----------------------
+.dockerignore
+
+# ----------------------
+# Misc
+# ----------------------
+*.tgz
+*.bak
+*.old
