@@ -4,7 +4,7 @@
 node_modules/
 
 # ----------------------
-# Environment variables (VERY IMPORTANT)
+# Environment variables
 # ----------------------
 .env
 .env.*
@@ -62,7 +62,7 @@ Thumbs.db
 *.swo
 
 # ----------------------
-# Optional: Uploads (if your app stores files)
+# Optional: Uploads
 # ----------------------
 uploads/
 public/uploads/

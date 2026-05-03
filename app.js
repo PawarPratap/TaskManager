@@ -1,12 +1,12 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
-const notFound = require("./middleware/notFound");
-const errorHandler = require("./middleware/errorMiddleware");
+const notFound = require("./middleware/notFound.middleware");
+const errorHandler = require("./middleware/error.middleware");
 const morgan = require("morgan"); // for logging
 const fs = require("fs"); // for logging to file
 const path = require("path"); // for constructing log file path
-const limiter = require("./middleware/rateLimiter"); // for general routes
+const limiter = require("./middleware/rateLimiter.middleware"); // for general routes
 const rateLimit = require("express-rate-limit"); // for auth routes
 
 
@@ -29,11 +29,11 @@ const authLimiter = rateLimit({
   message: "Too many login attempts",
 });
 
-// routes
-app.use("/api/auth", authLimiter, require("./routes/authRoutes")); // apply rate limiter only to auth routes
-app.use("/api/tasks", require("./routes/taskRoutes"));
+app.use("/api", limiter); // apply rate limiter to all(general rate limiting)
 
-app.use(limiter); // apply rate limiter to all other routes (general rate limiting)
+// routes
+app.use("/api/auth", authLimiter, require("./routes/auth.routes")); // apply rate limiter only to auth routes
+app.use("/api/tasks", require("./routes/task.routes"));
 
 // 404 handler
 app.use(notFound);

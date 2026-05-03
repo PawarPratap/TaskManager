@@ -1,153 +1,128 @@
-# 🚀 Auth + Task Manager API
+# 🧠 Task Manager API (Node.js + Express + MongoDB)
 
-A production-ready backend API built with Node.js, Express, MongoDB, and JWT authentication.
-This project demonstrates clean architecture (MVC), authentication, validation, error handling, and security best practices.
+A production-ready backend API for managing tasks with JWT authentication, clean architecture (MVC + Service Layer), validation, rate limiting, and logging.
 
 ---
 
-# 📌 Features
+## 🚀 Features
 
-* 🔐 User Authentication (JWT)
-* 👤 User Registration & Login
-* 📋 Task Management (CRUD)
-* 🔒 Protected Routes
-* ⚠️ Centralized Error Handling
-* ✅ Request Validation (Joi)
+* 🔐 JWT Authentication (Register/Login)
+* 📋 Task CRUD APIs (Create, Read, Update, Delete)
+* 🔎 Filter by status + Pagination
+* ✅ Validation middleware (Joi)
+* ⚡ Rate Limiting (auth + general)
 * 📝 Logging (Morgan)
-* 🚫 Rate Limiting (API Protection)
+* ❌ Centralized Error Handling
+* 🧱 Clean Architecture (Controller → Service → Model)
+* ♻️ Reusable middleware & constants
 
 ---
 
-# 🛠️ Tech Stack
-
-* **Backend:** Node.js, Express.js
-* **Database:** MongoDB
-* **Auth:** JWT (jsonwebtoken), bcrypt
-* **Validation:** Joi
-* **Logging:** Morgan
-* **Security:** express-rate-limit
-* **Tools:** VS Code, Postman, MongoDB Compass
-
----
-
-# 📂 Project Structure
+## 🏗️ Architecture
 
 ```
-/project
-  /config
-  /controllers
-  /models
-  /routes
-  /middleware
-  /validators
-  app.js
-  server.js
-  .env
+Controller → Service → Model
+        ↓
+   Middleware (Auth / Validation / Error / RateLimit)
 ```
 
 ---
 
-# ⚙️ Getting Started
+## 📂 Folder Structure
 
-## 1. Clone the repository
+```
+/config
+/controllers
+/services
+/models
+/routes
+/middleware
+/validators
+/utils
+app.js
+server.js
+```
+
+---
+
+## ⚙️ Tech Stack
+
+* Node.js
+* Express.js
+* MongoDB + Mongoose
+* JWT (Authentication)
+* Joi (Validation)
+* Morgan (Logging)
+
+---
+
+## 🔧 Setup & Run
 
 ```bash
 git clone <your-repo-url>
-cd project
-```
+cd taskManagerNodeJs
 
----
-
-## 2. Install dependencies
-
-```bash
 npm install
-```
 
----
-
-## 3. Setup environment variables
-
-Create a `.env` file:
-
-```env
+# create .env file
 PORT=5000
-MONGO_URI=mongodb://localhost:27017/taskmanager
-JWT_SECRET=your_secret_key
-```
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_secret
 
----
-
-## 4. Start MongoDB
-
-### Local:
-
-```bash
-sudo systemctl start mongod
-```
-
-### OR use MongoDB Atlas (cloud)
-
----
-
-## 5. Run the server
-
-```bash
 npm run dev
 ```
 
-Server will run on:
+---
+
+## 🌐 API Base URL
 
 ```
-http://localhost:5000
+http://localhost:5000/api
 ```
 
 ---
 
-# 🔐 Authentication APIs
+## 🔐 Auth APIs
 
-## Register
+### ➕ Register
 
-```
-POST /api/auth/register
-```
+**POST /api/auth/register**
 
 ```json
 {
-  "name": "John Doe",
-  "email": "john@test.com",
+  "name": "Pratap",
+  "email": "test@mail.com",
   "password": "123456"
 }
 ```
 
 ---
 
-## Login
+### 🔑 Login
 
-```
-POST /api/auth/login
-```
+**POST /api/auth/login**
 
 ```json
 {
-  "email": "john@test.com",
+  "email": "test@mail.com",
   "password": "123456"
 }
 ```
 
-Response:
+**Response:**
 
 ```json
 {
+  "success": true,
   "token": "JWT_TOKEN"
 }
 ```
 
 ---
 
-# 📋 Task APIs
+## 📋 Task APIs (Protected)
 
-## 🔒 Headers (Required)
+👉 Add header:
 
 ```
 Authorization: JWT_TOKEN
@@ -155,11 +130,9 @@ Authorization: JWT_TOKEN
 
 ---
 
-## Create Task
+### ➕ Create Task
 
-```
-POST /api/tasks
-```
+**POST /api/tasks**
 
 ```json
 {
@@ -169,19 +142,15 @@ POST /api/tasks
 
 ---
 
-## Get All Tasks
+### 📥 Get Tasks (Filter + Pagination)
 
-```
-GET /api/tasks
-```
+**GET /api/tasks?status=pending&page=1&limit=5**
 
 ---
 
-## Update Task
+### ✏️ Update Task
 
-```
-PUT /api/tasks/:id
-```
+**PUT /api/tasks/:id**
 
 ```json
 {
@@ -191,35 +160,13 @@ PUT /api/tasks/:id
 
 ---
 
-## Delete Task
+### ❌ Delete Task
 
-```
-DELETE /api/tasks/:id
-```
+**DELETE /api/tasks/:id**
 
 ---
 
-# 🧪 Testing
-
-Use **Postman**:
-
-### Flow:
-
-1. Register user
-2. Login → get token
-3. Add token in headers
-4. Test task APIs
-
----
-
-# ⚠️ Error Handling
-
-Centralized error handling middleware ensures:
-
-* Consistent API responses
-* No server crashes
-
-Example:
+## ⚠️ Error Handling
 
 ```json
 {
@@ -230,23 +177,19 @@ Example:
 
 ---
 
-# ✅ Validation
+## 🚀 Future Improvements
 
-* Implemented using Joi
-* Ensures correct request structure
-* Prevents invalid data
+* 🔍 Search + Sort API
+* 👥 Role-based Auth (Admin/User)
+* ☁️ Deployment (Render / VPS)
+* 🧪 Unit Testing (Jest)
+* 📄 Swagger API Documentation
 
 ---
 
-# 📝 Logging
+## 👨‍💻 Author
 
-* Morgan logs all HTTP requests
-
-Example:
-
-```
-POST /api/auth/login 200 45ms
-```
+**Pratap Pawar**
 
 ---
 
@@ -270,15 +213,7 @@ Example:
 
 ---
 
-# 🚀 Future Improvements
+## ⭐ Support
 
-* Role-based access control (Admin/User)
-* Pagination & filtering
-* Refresh tokens
-* Deployment (Render / VPS)
-
----
-
-# ⭐ Support
 
 If you like this project, give it a ⭐ on GitHub!
